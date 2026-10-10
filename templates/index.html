@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo-badge">IBM Watson NLP</div>
+            <h1>Emotion Detection</h1>
+            <p class="subtitle">Analyze text sentiment and identify dominant emotions in real time</p>
+        </header>
+
+        <main class="card">
+            <section class="input-section">
+                <label for="textToAnalyze" class="input-label">Enter text for emotion analysis:</label>
+                <textarea 
+                    id="textToAnalyze" 
+                    name="textToAnalyze" 
+                    rows="4" 
+                    placeholder="Type or paste a sentence here (e.g., 'I think I am having fun')..."
+                    required
+                ></textarea>
+                <div class="actions">
+                    <button id="submit-btn" type="button" onclick="runEmotionAnalysis()">
+                        <span class="btn-text">Analyze Emotion</span>
+                        <span id="loading-spinner" class="spinner hidden"></span>
+                    </button>
+                    <button id="clear-btn" type="button" class="btn-secondary" onclick="clearInput()">Clear</button>
+                </div>
+            </section>
+
+            <!-- Error message banner -->
+            <div id="error-container" class="alert alert-error hidden" role="alert">
+                <span class="alert-icon">⚠️</span>
+                <span id="error-text">Invalid text! Please try again!</span>
+            </div>
+
+            <!-- Results container -->
+            <section id="results-container" class="results-section hidden">
+                <div class="results-header">
+                    <h2>Analysis Results</h2>
+                </div>
+
+                <!-- Dominant emotion highlight card -->
+                <div id="dominant-card" class="dominant-card">
+                    <div class="dominant-label">Dominant Emotion</div>
+                    <div id="dominant-emotion-text" class="dominant-value">—</div>
+                </div>
+
+                <!-- Granular Emotion Scores Breakdown -->
+                <div class="scores-grid">
+                    <div class="score-card joy-card">
+                        <div class="emotion-header">
+                            <span class="emotion-name">😊 Joy</span>
+                            <span id="score-joy" class="score-val">0.00</span>
+                        </div>
+                        <div class="progress-bar"><div id="bar-joy" class="progress-fill joy-bar" style="width: 0%"></div></div>
+                    </div>
+
+                    <div class="score-card sadness-card">
+                        <div class="emotion-header">
+                            <span class="emotion-name">😢 Sadness</span>
+                            <span id="score-sadness" class="score-val">0.00</span>
+                        </div>
+                        <div class="progress-bar"><div id="bar-sadness" class="progress-fill sadness-bar" style="width: 0%"></div></div>
+                    </div>
+
+                    <div class="score-card anger-card">
+                        <div class="emotion-header">
+                            <span class="emotion-name">😠 Anger</span>
+                            <span id="score-anger" class="score-val">0.00</span>
+                        </div>
+                        <div class="progress-bar"><div id="bar-anger" class="progress-fill anger-bar" style="width: 0%"></div></div>
+                    </div>
+
+                    <div class="score-card fear-card">
+                        <div class="emotion-header">
+                            <span class="emotion-name">😨 Fear</span>
+                            <span id="score-fear" class="score-val">0.00</span>
+                        </div>
+                        <div class="progress-bar"><div id="bar-fear" class="progress-fill fear-bar" style="width: 0%"></div></div>
+                    </div>
+
+                    <div class="score-card disgust-card">
+                        <div class="emotion-header">
+                            <span class="emotion-name">🤢 Disgust</span>
+                            <span id="score-disgust" class="score-val">0.00</span>
+                        </div>
+                        <div class="progress-bar"><div id="bar-disgust" class="progress-fill disgust-bar" style="width: 0%"></div></div>
+                    </div>
+                </div>
+
+                <!-- Official Raw System Response for Coursework Compliance -->
+                <div class="system-response-wrapper">
+                    <div class="system-response-title">Official System Response</div>
+                    <div id="system_response" class="system-response-content"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>IBM Watson NLP Emotion Detection Application &bull; Flask &bull; Python</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
